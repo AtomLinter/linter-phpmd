@@ -1,4 +1,4 @@
-SublimeLinter-phpmd
+linter-phpmd
 =========================
 
 This linter plugin for [Linter](https://github.com/AtomLinter/Linter) provides an interface to [phpmd](http://phpmd.org/documentation/index.html). It will be used with files that have the “PHP” and “HTML” syntax.
