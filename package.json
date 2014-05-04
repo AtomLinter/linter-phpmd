@@ -2,7 +2,7 @@
   "name": "linter-phpmd",
   "main": "./lib/init",
   "linter-package": true,
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Linter plugin for PHP, using phpmd",
   "activationEvents": [
     "linter-phpmd:toggle"
