@@ -23,8 +23,11 @@ class LinterPhpmd extends Linter
 
 
   constructor: (editorView)->
-    @rulesets = atom.config.get 'linter-phpmd.rulesets'
-    @executablePath = atom.config.get 'linter-phpmd.phpmdExecutablePath'
+    atom.config.observe 'linter-phpmd.phpmdExecutablePath', =>
+      @executablePath = atom.config.get 'linter-phpmd.phpmdExecutablePath'
+
+    atom.config.observe 'linter-phpmd.rulesets', =>
+      @rulesets = atom.config.get 'linter-phpmd.rulesets'
 
   getCmd:(filePath) ->
     cmd = super(filePath)
