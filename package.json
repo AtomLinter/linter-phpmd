@@ -3,7 +3,7 @@
   "main": "./lib/init",
   "linter-package": true,
   "version": "0.0.5",
-  "description": "Linter plugin for PHP, using phpmd",
+  "description": "Lint PHP on the fly, using phpmd",
   "activationEvents": [
     "linter-phpmd:toggle"
   ],
