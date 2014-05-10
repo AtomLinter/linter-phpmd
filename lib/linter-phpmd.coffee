@@ -21,7 +21,9 @@ class LinterPhpmd extends Linter
 
   rulesets: null
 
-  constructor: (editorView)->
+  constructor: (editor)->
+    super(editor)
+
     atom.config.observe 'linter-phpmd.phpmdExecutablePath', =>
       @executablePath = atom.config.get 'linter-phpmd.phpmdExecutablePath'
 
