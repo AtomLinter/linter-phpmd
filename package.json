@@ -4,9 +4,6 @@
   "linter-package": true,
   "version": "0.0.5",
   "description": "Lint PHP on the fly, using phpmd",
-  "activationEvents": [
-    "linter-phpmd:toggle"
-  ],
   "repository": "https://github.com/AtomLinter/linter-phpmd",
   "license": "MIT",
   "engines": {
