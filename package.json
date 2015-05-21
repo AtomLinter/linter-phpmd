@@ -2,7 +2,7 @@
   "name": "linter-phpmd",
   "main": "./lib/init",
   "linter-package": true,
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Lint PHP on the fly, using phpmd",
   "repository": "https://github.com/AtomLinter/linter-phpmd",
   "license": "MIT",
