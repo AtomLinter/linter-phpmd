@@ -20,15 +20,16 @@ class LinterPhpmd extends Linter
   constructor: (editor)->
     super(editor)
 
-    atom.config.observe 'linter-phpmd.phpmdExecutablePath', =>
+    @executableSubscription = atom.config.observe 'linter-phpmd.phpmdExecutablePath', =>
       @executablePath = atom.config.get 'linter-phpmd.phpmdExecutablePath'
 
-    atom.config.observe 'linter-phpmd.rulesets', =>
+    @rulesetSubscription = atom.config.observe 'linter-phpmd.rulesets', =>
       @rulesets = atom.config.get 'linter-phpmd.rulesets'
       @cmd = 'phpmd @filename text @rulesets'.replace('@rulesets', @rulesets)
 
   destroy: ->
-    atom.config.unobserve 'linter-phpmd.phpmdExecutablePath'
-    atom.config.unobserve 'linter-phpmd.rulesets'
+    super
+    @executableSubscription.dispose()
+    @rulesetSubscription.dispose()
 
 module.exports = LinterPhpmd
