@@ -1,13 +1,18 @@
 {
   "name": "linter-phpmd",
-  "main": "./lib/init",
-  "linter-package": true,
-  "version": "0.0.11",
+  "main": "./lib/main",
+  "version": "0.0.12",
   "description": "Lint PHP on the fly, using phpmd",
   "repository": "https://github.com/AtomLinter/linter-phpmd",
   "license": "MIT",
-  "engines": {
-    "atom": ">0.50.0"
+  "dependencies": {
+    "atom-linter": "^2.0.1"
   },
-  "dependencies": {}
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "1.0.0": "provideLinter"
+      }
+    }
+  }
 }

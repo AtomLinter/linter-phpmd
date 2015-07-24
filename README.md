@@ -14,24 +14,24 @@ Before installing this plugin, you must ensure that `phpmd` is installed on your
 2. Install [pear](http://pear.php.net).
 
 3. Install `phpmd` by typing the following in a terminal:
-   ```
-   pear channel-discover pear.phpmd.org
-   pear channel-discover pear.pdepend.org
-   pear install --alldeps phpmd/PHP_PMD
-   ```
+ ```ShellSession
+ pear channel-discover pear.phpmd.org
+ pear channel-discover pear.pdepend.org
+ pear install --alldeps phpmd/PHP_PMD
+ ```
 
 Now you can proceed to install the linter-phpmd plugin.
 
 ### Plugin installation
-```
+```ShellSession
 $ apm install linter-phpmd
 ```
 
 ## Settings
 You can configure linter-phpmd by editing ~/.atom/config.cson (choose Open Your Config in Atom menu):
-```
+```cson
 'linter-phpmd':
-  'phpmdExecutablePath': null #phpmd path. run 'which phpmd' to find the path
+  'executablePath': null #phpmd path. run 'which phpmd' to find the path
   'rulesets': 'cleancode,codesize,controversial,design,naming,unusedcode' #phpmd rulesets
 ```
 
@@ -51,6 +51,3 @@ Please note that modifications should follow these coding guidelines:
 - Vertical whitespace helps readability, don’t be afraid to use it.
 
 Thank you for helping out!
-
-## Donation
-[![Share the love!](https://chewbacco-stuff.s3.amazonaws.com/donate.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXUYS4ARNHCN8)
