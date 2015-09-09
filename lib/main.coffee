@@ -13,6 +13,7 @@ module.exports =
       description: 'Comma separated list of rulesets to use in phpmd.'
 
   activate: ->
+    require("atom-package-deps").install("linter-phpmd")
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe 'linter-phpmd.executablePath',
       (executablePath) =>
