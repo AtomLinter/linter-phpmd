@@ -40,12 +40,12 @@ If you would like to contribute enhancements or fixes, please do the following:
 0. Hack on a separate topic branch created from the latest `master`.
 0. Commit and push the topic branch.
 0. Make a pull request.
-0. welcome to the club
+0. Welcome to the club!
 
 Please note that modifications should follow these coding guidelines:
 
 - Indent is 2 spaces.
-- Code should pass coffeelint linter.
+- Code should pass [CoffeeLint](http://www.coffeelint.org/) with the provided `coffeelint.json`.
 - Vertical whitespace helps readability, don’t be afraid to use it.
 
 Thank you for helping out!
