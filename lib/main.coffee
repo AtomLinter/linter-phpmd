@@ -28,6 +28,7 @@ module.exports =
   provideLinter: ->
     helpers = require('atom-linter')
     provider =
+      name: 'PHPMD'
       grammarScopes: ['text.html.php', 'source.php']
       scope: 'file'
       lintOnFly: false
