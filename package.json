@@ -9,9 +9,15 @@
     "atom-linter": "^3.2.1",
     "atom-package-deps": "^2.0.5"
   },
+  "devDependencies": {
+    "coffeelint": "^1.12.1"
+  },
   "package-deps": [
     "linter"
   ],
+  "scripts": {
+    "lint": "./node_modules/.bin/coffeelint lib"
+  },
   "providedServices": {
     "linter": {
       "versions": {
