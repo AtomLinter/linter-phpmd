@@ -51,8 +51,7 @@ module.exports =
         ruleset = @rulesets
         if @projectRules
           rulesetPath = helpers.findFile(filePath, 'ruleset.xml')
-          if rulesetPath is not null and rulesetPath.length > 0
-            ruleset = rulesetPath
+          ruleset = rulesetPath if rulesetPath?
         parameters = []
         parameters.push(filePath)
         parameters.push('text')
