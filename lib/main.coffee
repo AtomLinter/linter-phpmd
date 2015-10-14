@@ -48,12 +48,11 @@ module.exports =
       lint: (textEditor) =>
         filePath = textEditor.getPath()
         command = @executablePath
+        ruleset = @rulesets
         if @projectRules
           rulesetPath = helpers.findFile(filePath, 'ruleset.xml')
-          if rulesetPath.length
+          if rulesetPath is not null and rulesetPath.length > 0
             ruleset = rulesetPath
-        else
-          ruleset = @rulesets
         parameters = []
         parameters.push(filePath)
         parameters.push('text')
