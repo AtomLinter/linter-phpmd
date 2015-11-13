@@ -1,0 +1,28 @@
+version: "{build}"
+os: Windows Server 2012 R2
+branches:
+  only:
+    - master
+test: off
+deploy: off
+
+install:
+  - appveyor DownloadFile https://atom.io/download/windows -FileName AtomSetup.exe
+  - AtomSetup.exe /silent
+  # The following installs and sets up PHP
+  - cinst -y php
+  - cd c:\tools\php
+  - copy php.ini-production php.ini
+  - echo date.timezone="UTC" >> php.ini
+  - echo extension_dir=ext >> php.ini
+  - echo extension=php_openssl.dll >> php.ini
+  - SET PATH=C:\tools\php\;%PATH%
+  - curl -sSL https://getcomposer.org/installer | php
+  - php composer.phar global require "phpmd/phpmd"
+
+build_script:
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - SET PATH=%LOCALAPPDATA%\atom\bin;%PATH%
+  - apm clean
+  - apm install
+  - apm test
