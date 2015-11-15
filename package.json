@@ -6,11 +6,11 @@
   "repository": "https://github.com/AtomLinter/linter-phpmd",
   "license": "MIT",
   "dependencies": {
-    "atom-linter": "^3.2.1",
-    "atom-package-deps": "^2.0.5"
+    "atom-linter": "^3.3.2",
+    "atom-package-deps": "^3.0.1"
   },
   "devDependencies": {
-    "coffeelint": "^1.12.1"
+    "coffeelint": "^1.13.1"
   },
   "package-deps": [
     "linter"

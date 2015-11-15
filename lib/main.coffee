@@ -23,7 +23,7 @@ module.exports =
       order: 3
 
   activate: ->
-    require('atom-package-deps').install('linter-phpmd')
+    require('atom-package-deps').install()
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe 'linter-phpmd.executablePath',
       (executablePath) =>
