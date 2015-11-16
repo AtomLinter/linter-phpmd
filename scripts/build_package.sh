@@ -1,6 +1,5 @@
 #!/bin/sh
 
-echo "Downloading latest Atom release..."
 if [ "$LPHP_OS" = "linux" ]; then
   URL="https://atom.io/download/deb"
   FILE="atom-amd64.deb"
@@ -11,6 +10,7 @@ elif [ "$LPHP_OS" = "osx" ]; then
   ATOM_DIR=atom/Atom.app/Contents/Resources/app
 fi
 
+echo "Downloading latest Atom release..."
 curl -s -L "$URL" \
   -H 'Accept: application/octet-stream' \
   -o "$FILE"
@@ -26,16 +26,20 @@ if [ "$LPHP_OS" = "linux" ]; then
 elif [ "$LPHP_OS" = "osx" ]; then
   echo "Updating PHP to 5.6"
   curl -s http://php-osx.liip.ch/install.sh | bash -s 5.6
-  export PATH=/usr/local/php5/bin:$PATH
+  export PATH="/usr/local/php5/bin:$PATH"
   mkdir atom
   unzip -q "$FILE" -d atom
-  export PATH=$PWD/$ATOM_DIR/apm/bin:$PATH
+  export PATH="$PWD/$ATOM_DIR/apm/bin:$PATH"
   APM="$ATOM_DIR/apm/node_modules/.bin/apm"
 fi
 
+echo "Installing Composer"
+php -r "readfile('https://getcomposer.org/installer');" | sudo php -- --filename=composer
+sudo php composer config -g github-oauth.github.com cc4a091c096e7d3cfe053c3f669fb840be60ab98
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+
 echo "Installing PHPMD"
-curl -sSL https://getcomposer.org/installer | sudo php
-sudo php composer.phar global require "phpmd/phpmd"
+sudo php composer global require "phpmd/phpmd"
 
 echo "Using Atom version:"
 if [ "$LPHP_OS" = "linux" ]; then
@@ -46,6 +50,9 @@ fi
 
 echo "Using PHP version:"
 php --version
+
+echo "Using PHPMD version:"
+phpmd --version
 
 echo "Downloading package dependencies..."
 $APM clean
