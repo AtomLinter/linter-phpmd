@@ -1,4 +1,4 @@
-"use babel";
+'use babel';
 
 describe('The phpmd provider for Linter', () => {
   const lint = require('../lib/main').provideLinter().lint;
