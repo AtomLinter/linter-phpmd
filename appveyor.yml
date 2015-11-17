@@ -17,8 +17,10 @@ install:
   - echo extension_dir=ext >> php.ini
   - echo extension=php_openssl.dll >> php.ini
   - SET PATH=C:\tools\php\;%PATH%
-  - curl -sSL https://getcomposer.org/installer | php
-  - php composer.phar global require "phpmd/phpmd"
+  - php -r "readfile('https://getcomposer.org/installer');" | php -- --filename=composer
+  - php composer config -g github-oauth.github.com cc4a091c096e7d3cfe053c3f669fb840be60ab98
+  - php composer global require "phpmd/phpmd"
+  - SET PATH=%APPDATA%\Composer\vendor\bin;%PATH%
 
 build_script:
   - cd %APPVEYOR_BUILD_FOLDER%
