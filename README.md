@@ -5,22 +5,24 @@ linter-phpmd
 [![apm](https://img.shields.io/apm/v/linter-phpmd.svg)](https://atom.io/packages/linter-phpmd)
 [![apm](https://img.shields.io/apm/dm/linter-phpmd.svg)](https://atom.io/packages/linter-phpmd)
 
-This linter plugin for [Linter](https://github.com/AtomLinter/Linter) provides an interface to [phpmd](http://phpmd.org/documentation/index.html). It will be used with files that have the “PHP” syntax or PHP embedded within HTML.
+This linter plugin for [Linter](https://github.com/AtomLinter/Linter) provides
+an interface to [phpmd](http://phpmd.org/documentation/index.html). It will be
+used with files that have the "PHP" syntax or PHP embedded within HTML. A list
+of the rules checked and their definitions can be found here:
+http://phpmd.org/rules/index.html
 
 ## Installation
-### phpmd installation
-Before installing this plugin, you must ensure that `phpmd` is installed on your system. To install `phpmd`, do the following:
+### `phpmd` installation
+Before installing this plugin, you must ensure that `phpmd` is installed on your
+system. For detailed instructions see [phpmd.org](http://phpmd.org/download/index.html),
+the simplified steps are:
 
-1. Install [php](http://php.net).
-
-2. Install [pear](http://pear.php.net).
-
-3. Install `phpmd` by typing the following in a terminal:
- ```ShellSession
- pear channel-discover pear.phpmd.org
- pear channel-discover pear.pdepend.org
- pear install --alldeps phpmd/PHP_PMD
- ```
+0. Install [php](http://php.net).
+0. Install [Composer](https://getcomposer.org/download/).
+0. Install `phpmd` by typing the following in a terminal:
+```ShellSession
+composer global require phpmd
+```
 
 After verifying that `phpmd` works from your terminal, proceed to install the linter-phpmd plugin.
 
@@ -28,28 +30,3 @@ After verifying that `phpmd` works from your terminal, proceed to install the li
 ```ShellSession
 $ apm install linter-phpmd
 ```
-
-## Settings
-You can configure linter-phpmd by editing ~/.atom/config.cson (choose Open Your Config in Atom menu):
-```cson
-'linter-phpmd':
-  'executablePath': null #phpmd path. run `which phpmd` to find the path
-  'rulesets': 'cleancode,codesize,controversial,design,naming,unusedcode' #phpmd rulesets
-```
-
-## Contributing
-If you would like to contribute enhancements or fixes, please do the following:
-
-0. Fork the plugin repository.
-0. Hack on a separate topic branch created from the latest `master`.
-0. Commit and push the topic branch.
-0. Make a pull request.
-0. Welcome to the club!
-
-Please note that modifications should follow these coding guidelines:
-
-- Indent is 2 spaces.
-- Code should pass [CoffeeLint](http://www.coffeelint.org/) with the provided `coffeelint.json`.
-- Vertical whitespace helps readability, don’t be afraid to use it.
-
-Thank you for helping out!
