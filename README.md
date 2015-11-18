@@ -21,7 +21,7 @@ the simplified steps are:
 0. Install [Composer](https://getcomposer.org/download/).
 0. Install `phpmd` by typing the following in a terminal:
 ```ShellSession
-composer global require phpmd
+composer global require phpmd/phpmd
 ```
 
 After verifying that `phpmd` works from your terminal, proceed to install the linter-phpmd plugin.
