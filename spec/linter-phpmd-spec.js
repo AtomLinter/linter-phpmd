@@ -51,7 +51,7 @@ describe('The phpmd provider for Linter', () => {
           expect(messages[0].filePath).toMatch(/.+bad\.php$/);
           expect(messages[0].range).toBeDefined();
           expect(messages[0].range.length).toEqual(2);
-          expect(messages[0].range).toEqual([[1, 0], [1, 0]]);
+          expect(messages[0].range).toEqual([[1, 0], [1, 14]]);
         });
       });
     });
