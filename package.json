@@ -10,9 +10,9 @@
     "atom-package-deps": "^3.0.7"
   },
   "devDependencies": {
-    "coffeelint": "^1.13.1",
-    "eslint": "^1.9.0",
-    "eslint-config-airbnb": "latest"
+    "coffeelint": "^1.14.1",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^4.0.0"
   },
   "package-deps": [
     "linter"
