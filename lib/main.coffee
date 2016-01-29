@@ -50,7 +50,7 @@ module.exports =
         command = @executablePath
         ruleset = @rulesets
         if @projectRules
-          rulesetPath = helpers.findFile(filePath, 'ruleset.xml')
+          rulesetPath = helpers.find(filePath, 'ruleset.xml')
           ruleset = rulesetPath if rulesetPath?
         parameters = []
         parameters.push(filePath)
