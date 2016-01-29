@@ -60,4 +60,5 @@ module.exports =
           regex = '(?<file>.+):(?<line>[0-9]+)\t*(?<message>.+)'
           return helpers.parse(output, regex).map (error) ->
             error.type = 'Error'
+            error.range = helpers.rangeFromLineNumber textEditor, error.range[0][0]
             return error
