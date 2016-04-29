@@ -1,24 +1,40 @@
 {
   "name": "linter-phpmd",
-  "main": "./lib/main",
+  "main": "./lib/main.coffee",
+  "private": true,
   "version": "1.4.1",
   "description": "Lint PHP on the fly, using phpmd",
   "repository": "https://github.com/AtomLinter/linter-phpmd",
   "license": "MIT",
+  "keywords": [
+    "lint",
+    "linter",
+    "phpmd",
+    "php"
+  ],
+  "bugs": {
+    "url": "https://github.com/AtomLinter/linter-phpmd/issues"
+  },
+  "homepage": "https://github.com/AtomLinter/linter-phpmd#readme",
   "dependencies": {
     "atom-linter": "^4.5.1",
     "atom-package-deps": "^4.0.1"
   },
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
   "devDependencies": {
     "coffeelint": "^1.14.1",
-    "eslint": "^2.2.0",
-    "eslint-config-airbnb": "^7.0.0"
+    "eslint": "^2.8.0",
+    "eslint-config-airbnb-base": "^1.0.4",
+    "eslint-plugin-import": "^1.6.0"
   },
   "package-deps": [
     "linter"
   ],
   "scripts": {
-    "lint": "./node_modules/.bin/coffeelint lib"
+    "lint": "coffeelint lib && eslint spec",
+    "test": "apm test"
   },
   "providedServices": {
     "linter": {
@@ -28,13 +44,9 @@
     }
   },
   "eslintConfig": {
-    "extends": "airbnb/base",
+    "extends": "airbnb-base",
     "globals": {
-      "atom": true,
-      "waitsForPromise": true
-    },
-    "env": {
-      "jasmine": true
+      "atom": true
     }
   },
   "coffeelintConfig": {
