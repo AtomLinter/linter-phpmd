@@ -11,16 +11,8 @@ module.exports =
       type: 'string'
       title: 'PHPMD Rulesets'
       default: 'cleancode,codesize,controversial,design,naming,unusedcode'
-      description: 'Comma separated list of rulesets to use in phpmd.'
+      description: 'Comma separated list of rulesets to use in phpmd. You can also enter the name of your ruleset file (example: `ruleset.xml`) to load that from the current file\'s directory (or any of the parent directories) '
       order: 2
-    projectRules:
-      title: 'Automatically use ruleset.xml'
-      type: 'boolean'
-      default: false
-      description: 'Attempt to automatically find and use a `ruleset.xml` ' +
-        'file in the current file\'s directory or any parent directories. ' +
-        'Overrides any rulesets defined above.'
-      order: 3
 
   activate: ->
     require('atom-package-deps').install()
@@ -31,9 +23,6 @@ module.exports =
     @subscriptions.add atom.config.observe 'linter-phpmd.rulesets',
       (rulesets) =>
         @rulesets = rulesets
-    @subscriptions.add atom.config.observe 'linter-phpmd.projectRules',
-      (projectRules) =>
-        @projectRules = projectRules
 
   deactivate: ->
     @subscriptions.dispose()
@@ -49,8 +38,8 @@ module.exports =
         filePath = textEditor.getPath()
         command = @executablePath
         ruleset = @rulesets
-        if @projectRules
-          rulesetPath = helpers.find(filePath, 'ruleset.xml')
+        if /^[a-z0-9]+\.xml$/gi.test(@rulesets)
+          rulesetPath = helpers.find(filePath, @rulesets)
           ruleset = rulesetPath if rulesetPath?
         parameters = []
         parameters.push(filePath)
