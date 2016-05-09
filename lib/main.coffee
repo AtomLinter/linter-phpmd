@@ -30,7 +30,7 @@ module.exports =
     atom.config.get('linter-phpmd.rulesets') == 
     atom.config.defaultSettings['linter-phpmd'].rulesets
       atom.unset('linter-phpmd.projectRules')
-      atom.set('linter-phpmd.rulesets')
+      atom.set('linter-phpmd.rulesets', 'ruleset.xml')
     else if atom.config.get('linter-phpmd.projectRules') == true
       atom.unset('linter-phpmd.projectRules')
       atom.notifications.addInfo('You need to update your ' +
