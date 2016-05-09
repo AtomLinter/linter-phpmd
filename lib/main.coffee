@@ -45,7 +45,11 @@ module.exports =
         parameters.push(filePath)
         parameters.push('text')
         parameters.push(ruleset)
-        return helpers.exec(command, parameters).then (output) ->
+        options = {}
+        projectDir = atom.project.relativizePath(filePath)[0]
+        if projectDir?
+          options.cwd = projectDir
+        return helpers.exec(command, parameters, options).then (output) ->
           regex = '(?<file>.+):(?<line>[0-9]+)\t*(?<message>.+)'
           return helpers.parse(output, regex).map (error) ->
             error.type = 'Error'
