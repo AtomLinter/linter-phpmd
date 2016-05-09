@@ -26,6 +26,20 @@ module.exports =
     @subscriptions.add atom.config.observe 'linter-phpmd.rulesets',
       (rulesets) =>
         @rulesets = rulesets
+    if atom.config.get('linter-phpmd.projectRules') == true && 
+    atom.config.get('linter-phpmd.rulesets') == 
+    atom.config.defaultSettings['linter-phpmd'].rulesets
+      atom.unset('linter-phpmd.projectRules')
+      atom.set('linter-phpmd.rulesets')
+    else if atom.config.get('linter-phpmd.projectRules') == true
+      atom.unset('linter-phpmd.projectRules')
+      atom.notifications.addInfo('You need to update your ' +
+      '`linter-phpmd` settings', {
+        detail: 'The automatic searching for ruleset.xml feature is no ' +
+        'longer a separate setting. Enter "ruleset.xml" in the ' +
+        '"PHPMD Rulesets" to restore previous behavior.',
+        dismissable: true
+      })
 
   deactivate: ->
     @subscriptions.dispose()
