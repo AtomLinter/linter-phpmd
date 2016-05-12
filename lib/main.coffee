@@ -64,9 +64,7 @@ module.exports =
         parameters.push(ruleset)
         options = {}
         projectDir = atom.project.relativizePath(filePath)[0]
-        if projectDir?
-          options.cwd = projectDir
-        console.log(atom.project.relativizePath(filePath))
+        options.cwd = projectDir || textEditor.getDirectoryPath()
         return helpers.exec(command, parameters, options).then (output) ->
           regex = '(?<file>.+):(?<line>[0-9]+)\t*(?<message>.+)'
           return helpers.parse(output, regex).map (error) ->
