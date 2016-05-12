@@ -26,13 +26,13 @@ module.exports =
     @subscriptions.add atom.config.observe 'linter-phpmd.rulesets',
       (rulesets) =>
         @rulesets = rulesets
-    if atom.config.get('linter-phpmd.projectRules') == true && 
-    atom.config.get('linter-phpmd.rulesets') == 
+    if atom.config.get('linter-phpmd.projectRules') == true &&
+    atom.config.get('linter-phpmd.rulesets') ==
     atom.config.defaultSettings['linter-phpmd'].rulesets
-      atom.unset('linter-phpmd.projectRules')
-      atom.set('linter-phpmd.rulesets', 'ruleset.xml')
+      atom.config.unset('linter-phpmd.projectRules')
+      atom.config.set('linter-phpmd.rulesets', 'ruleset.xml')
     else if atom.config.get('linter-phpmd.projectRules') == true
-      atom.unset('linter-phpmd.projectRules')
+      atom.config.unset('linter-phpmd.projectRules')
       atom.notifications.addInfo('You need to update your ' +
       '`linter-phpmd` settings', {
         detail: 'The automatic searching for ruleset.xml feature is no ' +
@@ -66,6 +66,7 @@ module.exports =
         projectDir = atom.project.relativizePath(filePath)[0]
         if projectDir?
           options.cwd = projectDir
+        console.log(atom.project.relativizePath(filePath))
         return helpers.exec(command, parameters, options).then (output) ->
           regex = '(?<file>.+):(?<line>[0-9]+)\t*(?<message>.+)'
           return helpers.parse(output, regex).map (error) ->
