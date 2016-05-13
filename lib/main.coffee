@@ -28,7 +28,7 @@ module.exports =
         @rulesets = rulesets
         if atom.config.get('linter-phpmd.projectRules') == true &&
         atom.config.get('linter-phpmd.rulesets') ==
-        atom.config.defaultSettings['linter-phpmd'].rulesets
+        atom.config.getSchema('linter-phpmd.rulesets').default
           atom.config.unset('linter-phpmd.projectRules')
           atom.config.set('linter-phpmd.rulesets', 'ruleset.xml')
         else if atom.config.get('linter-phpmd.projectRules') == true
