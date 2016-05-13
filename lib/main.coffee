@@ -26,9 +26,9 @@ module.exports =
     @subscriptions.add atom.config.observe 'linter-phpmd.rulesets',
       (rulesets) =>
         @rulesets = rulesets
-        if atom.config.get('linter-phpmd.projectRules') == true
+        if atom.config.get('linter-phpmd.projectRules') is true
           atom.config.unset('linter-phpmd.projectRules')
-          if atom.config.get('linter-phpmd.rulesets') ==
+          if atom.config.get('linter-phpmd.rulesets') is
           atom.config.getSchema('linter-phpmd.rulesets').default
             atom.config.set('linter-phpmd.rulesets', 'ruleset.xml')
           else
@@ -63,7 +63,7 @@ module.exports =
         parameters.push(ruleset)
         options = {}
         projectDir = atom.project.relativizePath(filePath)[0]
-        options.cwd = projectDir || textEditor.getDirectoryPath()
+        options.cwd = projectDir or textEditor.getDirectoryPath()
         return helpers.exec(command, parameters, options).then (output) ->
           regex = '(?<file>.+):(?<line>[0-9]+)\t*(?<message>.+)'
           return helpers.parse(output, regex).map (error) ->
