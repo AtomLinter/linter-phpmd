@@ -10,7 +10,7 @@ module.exports =
     rulesets:
       type: 'string'
       title: 'PHPMD Rulesets'
-      default: 'cleancode,codesize,controversial,design,naming,unusedcode '
+      default: 'cleancode,codesize,controversial,design,naming,unusedcode'
       description: 'Comma separated list of rulesets to use in phpmd. ' +
                    'You can also enter the name of your ruleset file' +
                    '(example: `ruleset.xml`) to load that from the current ' +
