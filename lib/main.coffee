@@ -26,7 +26,7 @@ module.exports =
     @subscriptions.add atom.config.observe 'linter-phpmd.rulesets',
       (rulesets) =>
         @rulesets = rulesets
-        if atom.config.get('linter-phpmd.projectRules') is true
+        if atom.config.get('linter-phpmd').hasOwnProperty('projectRules')
           atom.config.unset('linter-phpmd.projectRules')
           if atom.config.get('linter-phpmd.rulesets') is
           atom.config.getSchema('linter-phpmd.rulesets').default
