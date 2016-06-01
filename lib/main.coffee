@@ -1,4 +1,5 @@
 {CompositeDisposable} = require 'atom'
+Path = require 'path'
 
 module.exports =
   config:
@@ -11,16 +12,11 @@ module.exports =
       type: 'string'
       title: 'PHPMD Rulesets'
       default: 'cleancode,codesize,controversial,design,naming,unusedcode'
-      description: 'Comma separated list of rulesets to use in phpmd.'
+      description: 'Comma separated list of rulesets to use in phpmd. ' +
+                   'You can also enter the name of your ruleset file' +
+                   '(example: `ruleset.xml`) to load that from the current ' +
+                   'file\'s directory (or any of the parent directories)'
       order: 2
-    projectRules:
-      title: 'Automatically use ruleset.xml'
-      type: 'boolean'
-      default: false
-      description: 'Attempt to automatically find and use a `ruleset.xml` ' +
-        'file in the current file\'s directory or any parent directories. ' +
-        'Overrides any rulesets defined above.'
-      order: 3
 
   activate: ->
     require('atom-package-deps').install()
@@ -31,9 +27,19 @@ module.exports =
     @subscriptions.add atom.config.observe 'linter-phpmd.rulesets',
       (rulesets) =>
         @rulesets = rulesets
-    @subscriptions.add atom.config.observe 'linter-phpmd.projectRules',
-      (projectRules) =>
-        @projectRules = projectRules
+        if atom.config.get('linter-phpmd').hasOwnProperty('projectRules')
+          atom.config.unset('linter-phpmd.projectRules')
+          if atom.config.get('linter-phpmd.rulesets') is
+          atom.config.getSchema('linter-phpmd.rulesets').default
+            atom.config.set('linter-phpmd.rulesets', 'ruleset.xml')
+          else
+            atom.notifications.addInfo('You need to update your ' +
+            '`linter-phpmd` settings', {
+              detail: 'The automatic searching for ruleset.xml feature is no ' +
+              'longer a separate setting. Enter "ruleset.xml" in the ' +
+              '"PHPMD Rulesets" to restore previous behavior.',
+              dismissable: true
+            })
 
   deactivate: ->
     @subscriptions.dispose()
@@ -49,14 +55,17 @@ module.exports =
         filePath = textEditor.getPath()
         command = @executablePath
         ruleset = @rulesets
-        if @projectRules
-          rulesetPath = helpers.find(filePath, 'ruleset.xml')
+        if /^[a-z0-9]+\.xml$/gi.test(@rulesets)
+          rulesetPath = helpers.find(filePath, @rulesets)
           ruleset = rulesetPath if rulesetPath?
         parameters = []
         parameters.push(filePath)
         parameters.push('text')
         parameters.push(ruleset)
-        return helpers.exec(command, parameters).then (output) ->
+        options = {}
+        projectDir = atom.project.relativizePath(filePath)[0]
+        options.cwd = projectDir or Path.dirname(filePath)
+        return helpers.exec(command, parameters, options).then (output) ->
           regex = '(?<file>.+):(?<line>[0-9]+)\t*(?<message>.+)'
           return helpers.parse(output, regex).map (error) ->
             error.type = 'Error'
