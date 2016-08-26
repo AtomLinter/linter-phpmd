@@ -54,8 +54,6 @@ describe('The phpmd provider for Linter', () => {
             '::a(). The configured minimum method name length is 3.');
           expect(messages[0].filePath).toBeDefined();
           expect(messages[0].filePath).toMatch(/.+bad\.php$/);
-          expect(messages[0].range).toBeDefined();
-          expect(messages[0].range.length).toEqual(2);
           expect(messages[0].range).toEqual([[1, 0], [1, 14]]);
         })
       );

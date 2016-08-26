@@ -62,7 +62,7 @@ module.exports =
         parameters.push(filePath)
         parameters.push('text')
         parameters.push(ruleset)
-        options = {}
+        options = {ignoreExitCode: true}
         projectDir = atom.project.relativizePath(filePath)[0]
         options.cwd = projectDir or Path.dirname(filePath)
         return helpers.exec(command, parameters, options).then (output) ->
