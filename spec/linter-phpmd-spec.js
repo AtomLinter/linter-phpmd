@@ -3,6 +3,7 @@
 import * as path from 'path';
 
 const lint = require('../lib/main.coffee').provideLinter().lint;
+
 const goodPath = path.join(__dirname, 'files', 'good.php');
 const badPath = path.join(__dirname, 'files', 'bad.php');
 const emptyPath = path.join(__dirname, 'files', 'empty.php');
