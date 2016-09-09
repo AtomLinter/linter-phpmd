@@ -1,22 +1,82 @@
-sudo: true
-git:
-  depth: 10
-branches:
-  only:
-    - master
+### Project specific config ###
+env:
+  global:
+    - APM_TEST_PACKAGES=""
+    - ATOM_LINT_WITH_BUNDLED_NODE="false"
+    - COMPOSER_DISABLE_XDEBUG_WARN="1"
+    - secure: "fiJ/CO0SWd3PPnNbYEtgKxw2xa9fKTOx3qNK48joGEkYFngl5o18l8GlaCZo0wzjhdZdhopts0ZYejdyqRQgxA1QKfCG/Te0ukygRMPXBC+oSTY8fyCWnueZ0fF3O0wrDQUYUTLf8nPrFKOw7bOi0sn+Lcu3mUaWlGxrsHsg9GU="
+
+matrix:
+  include:
+    - os: linux
+      language: php
+      php: 5.6
+      env: ATOM_CHANNEL=stable
+      install:
+        # Installed for linting the project
+        - nvm install node
+        # Set the GitHub OAuth token for Composer
+        - composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN"
+        - export PATH="$PATH:$HOME/.composer/vendor/bin"
+        # Install PHPMD
+        - composer global require "phpmd/phpmd"
+
+    - os: linux
+      language: php
+      php: 7.0
+      env: ATOM_CHANNEL=beta
+      install:
+        # Installed for linting the project
+        - nvm install node
+        # Set the GitHub OAuth token for Composer
+        - composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN"
+        - export PATH="$PATH:$HOME/.composer/vendor/bin"
+        # Install PHPMD
+        - composer global require "phpmd/phpmd"
+
+    - os: osx
+      # Note: The OSX builds do not natively support PHP, so the order is swapped
+      #  from the Linux builds.
+      # Installed for linting the project
+      language: node_js
+      node_js: "6"
+      env: ATOM_CHANNEL=stable
+      install:
+        # Install PHP 5.6
+        - curl -s http://php-osx.liip.ch/install.sh | bash -s 5.6
+        - export PATH="/usr/local/php5/bin:$PATH"
+        # Install Composer
+        - php -r "readfile('https://getcomposer.org/installer');" | sudo php -- --filename=composer
+        - export PATH="$PATH:$HOME/.composer/vendor/bin"
+        # Set the GitHub OAuth token for Composer
+        - sudo php composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN"
+        # Install PHPMD
+        - sudo php composer global require "phpmd/phpmd"
+
+before_script:
+  - phpmd --version
+
+### Generic setup follows ###
+script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
+
 notifications:
   email:
     on_success: never
     on_failure: change
-matrix:
-  include:
-    - os: linux
-      env: LPHP_OS=linux
-      before_script:
-        - export DISPLAY=:99.0
-        - sh -e /etc/init.d/xvfb start
-      language: php
-    - os: osx
-      env: LPHP_OS=osx
 
-script: scripts/build_package.sh
+branches:
+  only:
+    - master
+
+git:
+  depth: 10
+
+sudo: false
+
+addons:
+  apt:
+    packages:
+    - build-essential
+    - git
+    - libgnome-keyring-dev
+    - fakeroot
