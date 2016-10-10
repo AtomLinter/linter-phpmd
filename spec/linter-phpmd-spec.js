@@ -31,7 +31,7 @@ describe('The phpmd provider for Linter', () => {
     let editor = null;
     beforeEach(() => {
       waitsForPromise(() =>
-        atom.workspace.open(badPath).then(openEditor => {
+        atom.workspace.open(badPath).then((openEditor) => {
           editor = openEditor;
         })
       );
@@ -39,15 +39,15 @@ describe('The phpmd provider for Linter', () => {
 
     it('finds at least one message', () => {
       waitsForPromise(() =>
-        lint(editor).then(messages => {
-          expect(messages.length).toBeGreaterThan(0);
-        })
+        lint(editor).then(messages =>
+          expect(messages.length).toBeGreaterThan(0)
+        )
       );
     });
 
     it('verifies the first message', () => {
       waitsForPromise(() =>
-        lint(editor).then(messages => {
+        lint(editor).then((messages) => {
           expect(messages[0].type).toEqual('Error');
           expect(messages[0].html).not.toBeDefined();
           expect(messages[0].text).toEqual('Avoid using short method names like ' +
