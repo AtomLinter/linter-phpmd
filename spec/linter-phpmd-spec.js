@@ -2,7 +2,7 @@
 
 import * as path from 'path';
 
-const lint = require('../lib/main.coffee').provideLinter().lint;
+const lint = require('../lib/main.js').provideLinter().lint;
 
 const goodPath = path.join(__dirname, 'files', 'good.php');
 const badPath = path.join(__dirname, 'files', 'bad.php');
@@ -11,12 +11,14 @@ const emptyPath = path.join(__dirname, 'files', 'empty.php');
 describe('The phpmd provider for Linter', () => {
   beforeEach(() => {
     atom.workspace.destroyActivePaneItem();
-    waitsForPromise(() => {
-      atom.packages.activatePackage('linter-phpmd');
-      return atom.packages.activatePackage('language-php').then(() =>
+    waitsForPromise(() =>
+      Promise.all([
+        atom.packages.activatePackage('linter-phpmd'),
+        atom.packages.activatePackage('language-php'),
+      ]).then(() =>
         atom.workspace.open(goodPath)
-      );
-    });
+      )
+    );
   });
 
   it('should be in the packages list', () =>

@@ -1,6 +1,6 @@
 {
   "name": "linter-phpmd",
-  "main": "./lib/main.coffee",
+  "main": "./lib/main.js",
   "private": true,
   "version": "1.5.1",
   "description": "Lint PHP on the fly, using phpmd",
@@ -15,16 +15,30 @@
   "bugs": {
     "url": "https://github.com/AtomLinter/linter-phpmd/issues"
   },
+  "configSchema": {
+    "executablePath": {
+      "type": "string",
+      "title": "PHPMD Executable Path",
+      "default": "phpmd",
+      "order": 1
+    },
+    "rulesets": {
+      "type": "string",
+      "title": "PHPMD Rulesets",
+      "default": "cleancode,codesize,controversial,design,naming,unusedcode",
+      "description": "Comma separated list of rulesets to use in phpmd. You can also enter the name of your ruleset file (example: `ruleset.xml`) to load that from the current file's directory (or any of the parent directories)",
+      "order": 2
+    }
+  },
   "homepage": "https://github.com/AtomLinter/linter-phpmd#readme",
   "dependencies": {
     "atom-linter": "^8.0.0",
     "atom-package-deps": "^4.0.1"
   },
   "engines": {
-    "atom": ">=1.0.0 <2.0.0"
+    "atom": ">=1.4.0 <2.0.0"
   },
   "devDependencies": {
-    "coffeelint": "^1.14.1",
     "eslint": "^3.6.0",
     "eslint-config-airbnb-base": "^8.0.0",
     "eslint-plugin-import": "^1.16.0"
@@ -33,7 +47,7 @@
     "linter"
   ],
   "scripts": {
-    "lint": "coffeelint lib && eslint spec",
+    "lint": "eslint .",
     "test": "apm test"
   },
   "providedServices": {
@@ -45,143 +59,22 @@
   },
   "eslintConfig": {
     "extends": "airbnb-base",
+    "rules": {
+      "global-require": "off",
+      "import/no-unresolved": [
+        "error",
+        {
+          "ignore": [
+            "atom"
+          ]
+        }
+      ]
+    },
+    "env": {
+      "node": true
+    },
     "globals": {
       "atom": true
-    }
-  },
-  "coffeelintConfig": {
-    "arrow_spacing": {
-      "level": "error"
-    },
-    "braces_spacing": {
-      "level": "error",
-      "spaces": 0,
-      "empty_object_spaces": 0
-    },
-    "camel_case_classes": {
-      "level": "error"
-    },
-    "coffeescript_error": {
-      "level": "error"
-    },
-    "colon_assignment_spacing": {
-      "level": "error",
-      "spacing": {
-        "left": 0,
-        "right": 1
-      }
-    },
-    "cyclomatic_complexity": {
-      "value": 10,
-      "level": "ignore"
-    },
-    "duplicate_key": {
-      "level": "error"
-    },
-    "empty_constructor_needs_parens": {
-      "level": "ignore"
-    },
-    "ensure_comprehensions": {
-      "level": "warn"
-    },
-    "eol_last": {
-      "level": "ignore"
-    },
-    "indentation": {
-      "value": 2,
-      "level": "error"
-    },
-    "line_endings": {
-      "level": "ignore",
-      "value": "unix"
-    },
-    "max_line_length": {
-      "value": 120,
-      "level": "warn",
-      "limitComments": true
-    },
-    "missing_fat_arrows": {
-      "level": "ignore",
-      "is_strict": false
-    },
-    "newlines_after_classes": {
-      "value": 3,
-      "level": "ignore"
-    },
-    "no_backticks": {
-      "level": "error"
-    },
-    "no_debugger": {
-      "level": "error",
-      "console": false
-    },
-    "no_empty_functions": {
-      "level": "ignore"
-    },
-    "no_empty_param_list": {
-      "level": "error"
-    },
-    "no_implicit_braces": {
-      "level": "ignore",
-      "strict": true
-    },
-    "no_implicit_parens": {
-      "strict": true,
-      "level": "ignore"
-    },
-    "no_interpolation_in_single_quotes": {
-      "level": "error"
-    },
-    "no_nested_string_interpolation": {
-      "level": "warn"
-    },
-    "no_plusplus": {
-      "level": "ignore"
-    },
-    "no_private_function_fat_arrows": {
-      "level": "warn"
-    },
-    "no_stand_alone_at": {
-      "level": "error"
-    },
-    "no_tabs": {
-      "level": "error"
-    },
-    "no_this": {
-      "level": "ignore"
-    },
-    "no_throwing_strings": {
-      "level": "error"
-    },
-    "no_trailing_semicolons": {
-      "level": "error"
-    },
-    "no_trailing_whitespace": {
-      "level": "error",
-      "allowed_in_comments": false,
-      "allowed_in_empty_lines": true
-    },
-    "no_unnecessary_double_quotes": {
-      "level": "error"
-    },
-    "no_unnecessary_fat_arrows": {
-      "level": "warn"
-    },
-    "non_empty_constructor_needs_parens": {
-      "level": "ignore"
-    },
-    "prefer_english_operator": {
-      "level": "error",
-      "doubleNotLevel": "ignore"
-    },
-    "space_operators": {
-      "level": "ignore"
-    },
-    "spacing_after_comma": {
-      "level": "error"
-    },
-    "transform_messes_up_line_numbers": {
-      "level": "warn"
     }
   }
 }
