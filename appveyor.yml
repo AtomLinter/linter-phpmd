@@ -1,17 +1,13 @@
 ### Project specific config ###
 environment:
   COMPOSER_OAUTH_TOKEN: "cc4a091c096e7d3cfe053c3f669fb840be60ab98"
-  global:
-    APM_TEST_PACKAGES:
-    ATOM_LINT_WITH_BUNDLED_NODE: "false"
+  COMPOSER_DISABLE_XDEBUG_WARN: "1"
 
   matrix:
     - ATOM_CHANNEL: stable
     - ATOM_CHANNEL: beta
 
 install:
-  # Install Node.js to run any configured linters
-  - ps: Install-Product node 6
   # The following installs and sets up PHP
   - cinst -y php
   - cd c:\tools\php

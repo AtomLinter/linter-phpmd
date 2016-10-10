@@ -1,8 +1,6 @@
 ### Project specific config ###
 env:
   global:
-    - APM_TEST_PACKAGES=""
-    - ATOM_LINT_WITH_BUNDLED_NODE="false"
     - COMPOSER_DISABLE_XDEBUG_WARN="1"
     - secure: "fiJ/CO0SWd3PPnNbYEtgKxw2xa9fKTOx3qNK48joGEkYFngl5o18l8GlaCZo0wzjhdZdhopts0ZYejdyqRQgxA1QKfCG/Te0ukygRMPXBC+oSTY8fyCWnueZ0fF3O0wrDQUYUTLf8nPrFKOw7bOi0sn+Lcu3mUaWlGxrsHsg9GU="
 
@@ -13,8 +11,6 @@ matrix:
       php: 5.6
       env: ATOM_CHANNEL=stable
       install:
-        # Installed for linting the project
-        - nvm install node
         # Set the GitHub OAuth token for Composer
         - composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN"
         - export PATH="$PATH:$HOME/.composer/vendor/bin"
@@ -26,8 +22,6 @@ matrix:
       php: 7.0
       env: ATOM_CHANNEL=beta
       install:
-        # Installed for linting the project
-        - nvm install node
         # Set the GitHub OAuth token for Composer
         - composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN"
         - export PATH="$PATH:$HOME/.composer/vendor/bin"
@@ -38,8 +32,7 @@ matrix:
       # Note: The OSX builds do not natively support PHP, so the order is swapped
       #  from the Linux builds.
       # Installed for linting the project
-      language: node_js
-      node_js: "6"
+      language: generic
       env: ATOM_CHANNEL=stable
       install:
         # Install PHP 5.6
@@ -57,7 +50,10 @@ before_script:
   - phpmd --version
 
 ### Generic setup follows ###
-script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
+script:
+  - curl -s -O https://raw.githubusercontent.com/atom/ci/master/build-package.sh
+  - chmod u+x build-package.sh
+  - ./build-package.sh
 
 notifications:
   email:
