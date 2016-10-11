@@ -2,7 +2,7 @@
   "name": "linter-phpmd",
   "main": "./lib/main.js",
   "private": true,
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Lint PHP on the fly, using phpmd",
   "repository": "https://github.com/AtomLinter/linter-phpmd",
   "license": "MIT",
