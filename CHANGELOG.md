@@ -1,5 +1,17 @@
 # Change Log
 
+## [v1.5.3](https://github.com/AtomLinter/linter-phpmd/tree/v1.5.3) (2017-02-15)
+[Full Changelog](https://github.com/AtomLinter/linter-phpmd/compare/v1.5.2...v1.5.3)
+
+**Implemented enhancements:**
+
+- Update atom-linter to the latest version 🚀 [\#103](https://github.com/AtomLinter/linter-phpmd/pull/103) ([greenkeeper[bot]](https://github.com/integration/greenkeeper))
+- Update eslint-config-airbnb-base to v11.0.0 [\#100](https://github.com/AtomLinter/linter-phpmd/pull/100) ([Arcanemagus](https://github.com/Arcanemagus))
+
+**Fixed bugs:**
+
+- Fix PHP on AppVeyor [\#99](https://github.com/AtomLinter/linter-phpmd/pull/99) ([Arcanemagus](https://github.com/Arcanemagus))
+
 ## [v1.5.2](https://github.com/AtomLinter/linter-phpmd/tree/v1.5.2) (2016-10-11)
 [Full Changelog](https://github.com/AtomLinter/linter-phpmd/compare/v1.5.1...v1.5.2)
 
