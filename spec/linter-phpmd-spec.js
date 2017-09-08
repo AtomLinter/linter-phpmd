@@ -1,5 +1,7 @@
 'use babel';
 
+// eslint-disable-next-line no-unused-vars
+import { it, fit, wait, beforeEach, afterEach } from 'jasmine-fix';
 import * as path from 'path';
 
 const { lint } = require('../lib/main.js').provideLinter();
@@ -9,14 +11,10 @@ const badPath = path.join(__dirname, 'files', 'bad.php');
 const emptyPath = path.join(__dirname, 'files', 'empty.php');
 
 describe('The phpmd provider for Linter', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     atom.workspace.destroyActivePaneItem();
-    waitsForPromise(() =>
-      Promise.all([
-        atom.packages.activatePackage('linter-phpmd'),
-        atom.packages.activatePackage('language-php'),
-      ]).then(() =>
-        atom.workspace.open(goodPath)));
+    await atom.packages.activatePackage('language-php');
+    await atom.packages.activatePackage('linter-phpmd');
   });
 
   it('should be in the packages list', () =>
@@ -25,43 +23,30 @@ describe('The phpmd provider for Linter', () => {
   it('should be an active package', () =>
     expect(atom.packages.isPackageActive('linter-phpmd')).toBe(true));
 
-  describe('checks bad.php and', () => {
-    let editor = null;
-    beforeEach(() => {
-      waitsForPromise(() =>
-        atom.workspace.open(badPath).then((openEditor) => {
-          editor = openEditor;
-        }));
-    });
+  it('verifies the messages for bad.php', async () => {
+    const editor = await atom.workspace.open(badPath);
+    const messages = await lint(editor);
 
-    it('finds at least one message', () => {
-      waitsForPromise(() =>
-        lint(editor).then(messages =>
-          expect(messages.length).toBeGreaterThan(0)));
-    });
-
-    it('verifies the first message', () => {
-      waitsForPromise(() =>
-        lint(editor).then((messages) => {
-          expect(messages[0].type).toEqual('Error');
-          expect(messages[0].html).not.toBeDefined();
-          expect(messages[0].text).toEqual('Avoid using short method names like ' +
-            '::a(). The configured minimum method name length is 3.');
-          expect(messages[0].filePath).toBe(badPath);
-          expect(messages[0].range).toEqual([[1, 0], [1, 14]]);
-        }));
-    });
+    expect(messages.length).toBe(1);
+    expect(messages[0].type).toBe('Error');
+    expect(messages[0].html).not.toBeDefined();
+    expect(messages[0].text).toBe('Avoid using short method names like ::a(). ' +
+      'The configured minimum method name length is 3.');
+    expect(messages[0].filePath).toBe(badPath);
+    expect(messages[0].range).toEqual([[1, 0], [1, 14]]);
   });
 
-  it('finds nothing wrong with an empty file', () =>
-    waitsForPromise(() =>
-      atom.workspace.open(emptyPath).then(editor =>
-        lint(editor).then(messages =>
-          expect(messages.length).toBe(0)))));
+  it('finds nothing wrong with an empty file', async () => {
+    const editor = await atom.workspace.open(emptyPath);
+    const messages = await lint(editor);
 
-  it('finds nothing wrong with a valid file', () =>
-    waitsForPromise(() =>
-      atom.workspace.open(goodPath).then(editor =>
-        lint(editor).then(messages =>
-          expect(messages.length).toBe(0)))));
+    expect(messages.length).toBe(0);
+  });
+
+  it('finds nothing wrong with a valid file', async () => {
+    const editor = await atom.workspace.open(goodPath);
+    const messages = await lint(editor);
+
+    expect(messages.length).toBe(0);
+  });
 });
