@@ -8,6 +8,7 @@ const { lint } = require('../lib/main.js').provideLinter();
 
 const goodPath = path.join(__dirname, 'files', 'good.php');
 const badPath = path.join(__dirname, 'files', 'bad.php');
+const badSuppressedPath = path.join(__dirname, 'files', 'bad-suppressed.php');
 const emptyPath = path.join(__dirname, 'files', 'empty.php');
 
 describe('The phpmd provider for Linter', () => {
@@ -48,5 +49,34 @@ describe('The phpmd provider for Linter', () => {
     const messages = await lint(editor);
 
     expect(messages.length).toBe(0);
+  });
+
+  it('finds nothing wrong with suppressed warnings', async () => {
+    const editor = await atom.workspace.open(badSuppressedPath);
+    const messages = await lint(editor);
+
+    expect(messages.length).toBe(0);
+  });
+
+  it('finds nothing wrong with suppressed warnings by minimum priority', async () => {
+    atom.config.set('linter-phpmd.minimumPriority', 0);
+    const editor = await atom.workspace.open(badPath);
+    const messages = await lint(editor);
+
+    expect(messages.length).toBe(0);
+  });
+
+  it('verifies the messages for bad-suppressed.php with strict mode set', async () => {
+    atom.config.set('linter-phpmd.strictMode', true);
+    const editor = await atom.workspace.open(badSuppressedPath);
+    const messages = await lint(editor);
+
+    expect(messages.length).toBe(1);
+    expect(messages[0].type).toBe('Error');
+    expect(messages[0].html).not.toBeDefined();
+    expect(messages[0].text).toBe('Avoid using short method names like ::a(). ' +
+      'The configured minimum method name length is 3.');
+    expect(messages[0].filePath).toBe(badSuppressedPath);
+    expect(messages[0].range).toEqual([[6, 0], [6, 14]]);
   });
 });

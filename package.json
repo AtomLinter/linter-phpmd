@@ -18,16 +18,58 @@
   "configSchema": {
     "executablePath": {
       "type": "string",
-      "title": "PHPMD Executable Path",
       "default": "phpmd",
+      "description": "Enter the path to your phpmd executable.",
       "order": 1
     },
-    "rulesets": {
-      "type": "string",
-      "title": "PHPMD Rulesets",
-      "default": "cleancode,codesize,controversial,design,naming,unusedcode",
-      "description": "Comma separated list of rulesets to use in phpmd. You can also enter the name of your ruleset file (example: `ruleset.xml`) to load that from the current file's directory (or any of the parent directories)",
+    "autoExecutableSearch": {
+      "title": "Search for executables",
+      "type": "boolean",
+      "default": true,
+      "description": "Automatically search for `vendor/bin/phpmd` executable. Overrides the exectuable defined above.",
       "order": 2
+    },
+    "rulesOrConfigFile": {
+      "type": "array",
+      "default": [
+        "cleancode",
+        "codesize",
+        "controversial",
+        "design",
+        "naming",
+        "unusedcode"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "description": "Enter path to ruleset file or a predefined rulesets.",
+      "order": 3
+    },
+    "disableWhenNoConfigFile": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disable the linter when the default ruleset file is not found.",
+      "order": 4
+    },
+    "autoConfigSearch": {
+      "title": "Search for ruleset files",
+      "type": "boolean",
+      "default": true,
+      "description": "Automatically search for any `phpmd.xml`, `phpmd.xml.dist` or `phpmd.ruleset.xml` file to use as ruleset. Overrides custom ruleset(s) defined above.",
+      "order": 5
+    },
+    "minimumPriority": {
+      "type": "integer",
+      "default": -1,
+      "minimum": -1,
+      "description": "Rule priority threshold; rules with lower priority than this will not be used.",
+      "order": 7
+    },
+    "strictMode": {
+      "type": "boolean",
+      "default": false,
+      "description": "Also report those nodes with a @SuppressWarnings annotation.",
+      "order": 8
     }
   },
   "homepage": "https://github.com/AtomLinter/linter-phpmd#readme",
@@ -71,11 +113,12 @@
         }
       ]
     },
-    "env": {
-      "node": true
-    },
     "globals": {
       "atom": true
+    },
+    "env": {
+      "node": true,
+      "browser": true
     }
   }
 }
