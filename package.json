@@ -63,13 +63,13 @@
       "default": -1,
       "minimum": -1,
       "description": "Rule priority threshold; rules with lower priority than this will not be used.",
-      "order": 7
+      "order": 6
     },
     "strictMode": {
       "type": "boolean",
       "default": false,
       "description": "Also report those nodes with a @SuppressWarnings annotation.",
-      "order": 8
+      "order": 7
     }
   },
   "homepage": "https://github.com/AtomLinter/linter-phpmd#readme",
