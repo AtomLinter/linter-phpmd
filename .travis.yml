@@ -2,7 +2,7 @@
 env:
   global:
     - COMPOSER_DISABLE_XDEBUG_WARN="1"
-    - secure: "fiJ/CO0SWd3PPnNbYEtgKxw2xa9fKTOx3qNK48joGEkYFngl5o18l8GlaCZo0wzjhdZdhopts0ZYejdyqRQgxA1QKfCG/Te0ukygRMPXBC+oSTY8fyCWnueZ0fF3O0wrDQUYUTLf8nPrFKOw7bOi0sn+Lcu3mUaWlGxrsHsg9GU="
+    - COMPOSER_OAUTH_TOKEN="cc4a091c096e7d3cfe053c3f669fb840be60ab98"
 
 matrix:
   include:
