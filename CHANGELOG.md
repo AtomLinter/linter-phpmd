@@ -1,11 +1,29 @@
 # Change Log
 
+## [v2.0.0](https://github.com/AtomLinter/linter-phpmd/tree/v2.0.0) (2017-09-18)
+[Full Changelog](https://github.com/AtomLinter/linter-phpmd/compare/v1.5.3...v2.0.0)
+
+**Implemented enhancements:**
+
+- Project specific configuration [\#106](https://github.com/AtomLinter/linter-phpmd/issues/106)
+- Only lint when phpmd.xml exists [\#102](https://github.com/AtomLinter/linter-phpmd/issues/102)
+- Expand configuration options [\#115](https://github.com/AtomLinter/linter-phpmd/pull/115) ([mdeboer](https://github.com/mdeboer))
+- Asyncify the specs [\#114](https://github.com/AtomLinter/linter-phpmd/pull/114) ([Arcanemagus](https://github.com/Arcanemagus))
+- Update eslint-config-airbnb-base to version 12.0.0 🚀 [\#113](https://github.com/AtomLinter/linter-phpmd/pull/113) ([greenkeeper[bot]](https://github.com/apps/greenkeeper))
+- Update eslint to version 4.3.0 🚀 [\#109](https://github.com/AtomLinter/linter-phpmd/pull/109) ([greenkeeper[bot]](https://github.com/apps/greenkeeper))
+- Update atom-linter to version 10.0.0 🚀 [\#108](https://github.com/AtomLinter/linter-phpmd/pull/108) ([greenkeeper[bot]](https://github.com/apps/greenkeeper))
+
+**Fixed bugs:**
+
+- Expand configuration options [\#115](https://github.com/AtomLinter/linter-phpmd/pull/115) ([mdeboer](https://github.com/mdeboer))
+- Fix Travis CI builds [\#112](https://github.com/AtomLinter/linter-phpmd/pull/112) ([Arcanemagus](https://github.com/Arcanemagus))
+
 ## [v1.5.3](https://github.com/AtomLinter/linter-phpmd/tree/v1.5.3) (2017-02-15)
 [Full Changelog](https://github.com/AtomLinter/linter-phpmd/compare/v1.5.2...v1.5.3)
 
 **Implemented enhancements:**
 
-- Update atom-linter to the latest version 🚀 [\#103](https://github.com/AtomLinter/linter-phpmd/pull/103) ([greenkeeper[bot]](https://github.com/integration/greenkeeper))
+- Update atom-linter to version 9.0.0 🚀 [\#103](https://github.com/AtomLinter/linter-phpmd/pull/103) ([greenkeeper[bot]](https://github.com/apps/greenkeeper))
 - Update eslint-config-airbnb-base to v11.0.0 [\#100](https://github.com/AtomLinter/linter-phpmd/pull/100) ([Arcanemagus](https://github.com/Arcanemagus))
 
 **Fixed bugs:**
