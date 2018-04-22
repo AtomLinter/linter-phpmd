@@ -4,7 +4,10 @@
   "private": true,
   "version": "2.0.0",
   "description": "Lint PHP on the fly, using phpmd",
-  "repository": "https://github.com/AtomLinter/linter-phpmd",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AtomLinter/linter-phpmd.git"
+  },
   "license": "MIT",
   "keywords": [
     "lint",
