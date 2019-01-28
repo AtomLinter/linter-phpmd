@@ -1,10 +1,9 @@
 ### Project specific config ###
+os: linux
+language: php
 env:
   global:
     - COMPOSER_DISABLE_XDEBUG_WARN="1"
-
-os: linux
-language: php
 
 jobs:
   include:
@@ -41,7 +40,7 @@ jobs:
 install:
   # Set the GitHub OAuth token for Composer
   - composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN"
-  - export PATH="$PATH:$HOME/.composer/vendor/bin"
+  - export PATH="$PATH:$HOME/.config/composer/vendor/bin"
   # Install PHPMD
   - composer global require "phpmd/phpmd"
 
