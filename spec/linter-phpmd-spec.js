@@ -29,12 +29,13 @@ describe('The phpmd provider for Linter', () => {
     const messages = await lint(editor);
 
     expect(messages.length).toBe(1);
-    expect(messages[0].type).toBe('Error');
-    expect(messages[0].html).not.toBeDefined();
-    expect(messages[0].text).toBe('Avoid using short method names like ::a(). ' +
+    expect(messages[0].severity).toBe('error');
+    expect(messages[0].url).not.toBeDefined();
+    expect(messages[0].description).not.toBeDefined();
+    expect(messages[0].excerpt).toBe('Avoid using short method names like ::a(). ' +
       'The configured minimum method name length is 3.');
-    expect(messages[0].filePath).toBe(badPath);
-    expect(messages[0].range).toEqual([[1, 0], [1, 14]]);
+    expect(messages[0].location.file).toBe(badPath);
+    expect(messages[0].location.position).toEqual([[1, 0], [1, 14]]);
   });
 
   it('finds nothing wrong with an empty file', async () => {
@@ -72,11 +73,12 @@ describe('The phpmd provider for Linter', () => {
     const messages = await lint(editor);
 
     expect(messages.length).toBe(1);
-    expect(messages[0].type).toBe('Error');
-    expect(messages[0].html).not.toBeDefined();
-    expect(messages[0].text).toBe('Avoid using short method names like ::a(). ' +
+    expect(messages[0].severity).toBe('error');
+    expect(messages[0].url).not.toBeDefined();
+    expect(messages[0].description).not.toBeDefined();
+    expect(messages[0].excerpt).toBe('Avoid using short method names like ::a(). ' +
       'The configured minimum method name length is 3.');
-    expect(messages[0].filePath).toBe(badSuppressedPath);
-    expect(messages[0].range).toEqual([[6, 0], [6, 14]]);
+    expect(messages[0].location.file).toBe(badSuppressedPath);
+    expect(messages[0].location.position).toEqual([[6, 0], [6, 14]]);
   });
 });
