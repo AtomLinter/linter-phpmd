@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/AtomLinter/linter-phpmd/compare/v2.0.0...v2.0.1) (2019-01-29)
+
+
+### Bug Fixes
+
+* support v2 Linter API ([3a87f51](https://github.com/AtomLinter/linter-phpmd/commit/3a87f51))
+
 # Change Log
 
 ## [v2.0.0](https://github.com/AtomLinter/linter-phpmd/tree/v2.0.0) (2017-09-18)
