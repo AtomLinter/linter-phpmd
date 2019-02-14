@@ -1,7 +1,9 @@
 'use babel';
 
-// eslint-disable-next-line no-unused-vars
-import { it, fit, wait, beforeEach, afterEach } from 'jasmine-fix';
+import {
+  // eslint-disable-next-line no-unused-vars
+  it, fit, wait, beforeEach, afterEach,
+} from 'jasmine-fix';
 import * as path from 'path';
 
 const { lint } = require('../lib/main.js').provideLinter();
@@ -18,11 +20,13 @@ describe('The phpmd provider for Linter', () => {
     await atom.packages.activatePackage('linter-phpmd');
   });
 
-  it('should be in the packages list', () =>
-    expect(atom.packages.isPackageLoaded('linter-phpmd')).toBe(true));
+  it('should be in the packages list', () => {
+    expect(atom.packages.isPackageLoaded('linter-phpmd')).toBe(true);
+  });
 
-  it('should be an active package', () =>
-    expect(atom.packages.isPackageActive('linter-phpmd')).toBe(true));
+  it('should be an active package', () => {
+    expect(atom.packages.isPackageActive('linter-phpmd')).toBe(true);
+  });
 
   it('verifies the messages for bad.php', async () => {
     const editor = await atom.workspace.open(badPath);
@@ -32,8 +36,8 @@ describe('The phpmd provider for Linter', () => {
     expect(messages[0].severity).toBe('error');
     expect(messages[0].url).not.toBeDefined();
     expect(messages[0].description).not.toBeDefined();
-    expect(messages[0].excerpt).toBe('Avoid using short method names like ::a(). ' +
-      'The configured minimum method name length is 3.');
+    expect(messages[0].excerpt).toBe('Avoid using short method names like ::a(). '
+      + 'The configured minimum method name length is 3.');
     expect(messages[0].location.file).toBe(badPath);
     expect(messages[0].location.position).toEqual([[1, 0], [1, 14]]);
   });
@@ -76,8 +80,8 @@ describe('The phpmd provider for Linter', () => {
     expect(messages[0].severity).toBe('error');
     expect(messages[0].url).not.toBeDefined();
     expect(messages[0].description).not.toBeDefined();
-    expect(messages[0].excerpt).toBe('Avoid using short method names like ::a(). ' +
-      'The configured minimum method name length is 3.');
+    expect(messages[0].excerpt).toBe('Avoid using short method names like ::a(). '
+      + 'The configured minimum method name length is 3.');
     expect(messages[0].location.file).toBe(badSuppressedPath);
     expect(messages[0].location.position).toEqual([[6, 0], [6, 14]]);
   });
