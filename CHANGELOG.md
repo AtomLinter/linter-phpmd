@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/AtomLinter/linter-phpmd/compare/v2.0.1...v2.0.2) (2019-04-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency atom-package-deps to v5.1.0 ([184e85e](https://github.com/AtomLinter/linter-phpmd/commit/184e85e))
+
 ## [2.0.1](https://github.com/AtomLinter/linter-phpmd/compare/v2.0.0...v2.0.1) (2019-01-29)
 
 
